@@ -3,6 +3,17 @@ import "./App.css";
 
 function App() {
     const [year] = useState<number>(new Date().getFullYear());
+    const [theme, setTheme] = useState<'theme-dark' | 'theme-light'>(() => {
+        try {
+            const saved = localStorage.getItem("theme");
+            if (saved === "theme-dark" || saved === "theme-light") return saved;
+            return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "theme-light"
+                : "theme-dark";
+        } catch {
+            return "theme-dark";
+        }
+    });
 
     useEffect(() => {
         // Smooth Scroll
@@ -18,16 +29,7 @@ function App() {
             a.addEventListener("click", handleLinkClick)
         );
 
-        // Theme Toggle
-        const root = document.documentElement;
-        const toggle = document.getElementById("themeToggle");
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) root.classList.add(savedTheme);
-        toggle?.addEventListener("click", () => {
-            const dark = root.classList.toggle("theme-dark");
-            root.classList.toggle("theme-light", !dark);
-            localStorage.setItem("theme", dark ? "theme-dark" : "theme-light");
-        });
+        // Theme handled via React state (see separate effect below)
 
         // Scroll Progress
         const progress = document.querySelector(".progress") as HTMLElement;
@@ -130,6 +132,19 @@ function App() {
         };
     }, []);
 
+    // Apply theme class to <html> whenever `theme` changes
+    useEffect(() => {
+        const root = document.documentElement;
+        root.classList.remove("theme-dark", "theme-light");
+        root.classList.add(theme);
+        try {
+            localStorage.setItem("theme", theme);
+        } catch { }
+        return () => {
+            root.classList.remove("theme-dark", "theme-light");
+        };
+    }, [theme]);
+
     return (
         <div>
             <div className="progress" aria-hidden="true"></div>
@@ -150,6 +165,7 @@ function App() {
                                 className="theme-toggle"
                                 id="themeToggle"
                                 aria-label="Toggle theme"
+                                onClick={() => setTheme(prev => prev === 'theme-dark' ? 'theme-light' : 'theme-dark')}
                             >
                                 🌓
                             </button>
