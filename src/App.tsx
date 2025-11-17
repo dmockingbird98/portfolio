@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+    const [year] = useState<number>(new Date().getFullYear());
+
     useEffect(() => {
         // Smooth Scroll
         const handleLinkClick = (e: Event) => {
@@ -120,10 +122,6 @@ function App() {
                 }, 1600);
             } catch { }
         });
-
-        // Footer Year
-        const yearEl = document.getElementById("year");
-        if (yearEl) yearEl.textContent = new Date().getFullYear().toString();
 
         return () => {
             document
@@ -362,7 +360,7 @@ function App() {
 
             <footer>
                 <div className="container">
-                    © <span id="year"></span> Anand Raghunathan. All rights reserved.
+                    © <span>{year}</span> Anand Raghunathan. All rights reserved.
                 </div>
             </footer>
         </div>
