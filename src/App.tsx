@@ -255,42 +255,49 @@ function App() {
                         <h2>Featured Projects</h2>
                         <p className="lead">A few things I've shipped recently. Hover for a 3D tilt and click to learn more.</p>
 
-                        <div className="grid" role="list">
-                            <article className="project card tilt reveal" role="listitem" tabIndex={0}>
-                                <div className="thumb">Realtime Dashboard</div>
-                                <div className="content">
-                                    <h3>Telemetry Control Center</h3>
-                                    <p>Low-latency charts and alerts for IoT fleets using WebSockets and React Server Components.</p>
-                                    <div className="links">
-                                        <a className="btn ghost" href="#" aria-label="Live demo for Telemetry Control Center">Live</a>
-                                        <a className="btn ghost" href="#" aria-label="Source code for Telemetry Control Center">Code</a>
+                        <div style={{ position: "relative" }}>
+                            <div className="grid" role="list">
+                                <article className="project card tilt reveal" role="listitem" tabIndex={0}>
+                                    <div className="thumb">Realtime Dashboard</div>
+                                    <div className="content">
+                                        <h3>Telemetry Control Center</h3>
+                                        <p>Low-latency charts and alerts for IoT fleets using WebSockets and React Server Components.</p>
+                                        <div className="links">
+                                            <a className="btn ghost" href="#" aria-label="Live demo for Telemetry Control Center">Live</a>
+                                            <a className="btn ghost" href="#" aria-label="Source code for Telemetry Control Center">Code</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
 
-                            <article className="project card tilt reveal" role="listitem" tabIndex={0}>
-                                <div className="thumb">AI Docs Q&A</div>
-                                <div className="content">
-                                    <h3>DocsGPT</h3>
-                                    <p>RAG-powered knowledge base with embeddings, semantic search, and chat UX.</p>
-                                    <div className="links">
-                                        <a className="btn ghost" href="#">Live</a>
-                                        <a className="btn ghost" href="#">Code</a>
+                                <article className="project card tilt reveal" role="listitem" tabIndex={0}>
+                                    <div className="thumb">AI Docs Q&A</div>
+                                    <div className="content">
+                                        <h3>DocsGPT</h3>
+                                        <p>RAG-powered knowledge base with embeddings, semantic search, and chat UX.</p>
+                                        <div className="links">
+                                            <a className="btn ghost" href="#">Live</a>
+                                            <a className="btn ghost" href="#">Code</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
 
-                            <article className="project card tilt reveal" role="listitem" tabIndex={0}>
-                                <div className="thumb">Payments Platform</div>
-                                <div className="content">
-                                    <h3>Checkout Engine</h3>
-                                    <p>Full-stack payments with PCI-safe tokenization, webhooks, and fraud signals.</p>
-                                    <div className="links">
-                                        <a className="btn ghost" href="#">Live</a>
-                                        <a className="btn ghost" href="#">Code</a>
+                                <article className="project card tilt reveal" role="listitem" tabIndex={0}>
+                                    <div className="thumb">Payments Platform</div>
+                                    <div className="content">
+                                        <h3>Checkout Engine</h3>
+                                        <p>Full-stack payments with PCI-safe tokenization, webhooks, and fraud signals.</p>
+                                        <div className="links">
+                                            <a className="btn ghost" href="#">Live</a>
+                                            <a className="btn ghost" href="#">Code</a>
+                                        </div>
                                     </div>
+                                </article>
+                            </div>
+                            <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0.5)", borderRadius: "8px", pointerEvents: "none" }}>
+                                <div style={{ padding: "2rem", backgroundColor: "var(--card-2)", borderRadius: "8px", border: "2px solid var(--accent)", textAlign: "center" }}>
+                                    <p style={{ margin: 0, fontSize: "1.3em", fontWeight: "600", color: "var(--text)" }}>🚀 More projects coming soon...</p>
                                 </div>
-                            </article>
+                            </div>
                         </div>
                     </div>
                 </section>
