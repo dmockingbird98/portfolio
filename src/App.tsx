@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import resume from "./assets/Anand_Raghunathan_Resume.pdf";
 
 function App() {
     const [year] = useState<number>(new Date().getFullYear());
@@ -184,7 +185,7 @@ function App() {
                             <div className="hero-cta reveal" style={{ animationDelay: ".08s" }}>
                                 <a className="btn" href="#projects">View Projects</a>
                                 <a className="btn ghost" href="#contact">Contact Me</a>
-                                <a className="btn ghost" href="resume.pdf" download>⬇️ Download Résumé</a>
+                                <a className="btn ghost" href={resume} download>Download Résumé</a>
                             </div>
                         </div>
                         <div className="portrait tilt" aria-label="Abstract portrait placeholder">
