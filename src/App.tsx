@@ -53,7 +53,7 @@ function App() {
                     }
                 });
             },
-            { threshold: 0.12 }
+            { threshold: 0.01 }
         );
         revealEls.forEach(el => io.observe(el));
 
@@ -302,28 +302,46 @@ function App() {
                         <ol className="timeline" aria-label="Career timeline">
                             <li className="t-item card reveal" style={{ padding: 16, listStyle: "none" }}>
                                 <div className="t-dot" aria-hidden="true"></div>
-                                <strong>Senior Software Engineer — Acme Corp</strong>
-                                <div className="muted" style={{ color: "var(--muted)" }}>2022 — Present</div>
+                                <strong>Programming Analyst — The Boeing Company</strong>
+                                <div className="muted" style={{ color: "var(--muted)" }}>May 2023 — Present</div>
                                 <ul>
-                                    <li>Led migration to TypeScript and improved CI/CD, cutting defects by 30% and deploy time by 50%.</li>
-                                    <li>Built micro-frontend architecture enabling independent deployments across 6 teams.</li>
+                                    <li>Implemented cross-site script injection logic using Javascript and Jquery. Reduced Code redundancy and rework of around 400%</li>
+                                    <li>Played a pivotal role in managing and implementing Next-Gen features, gathering requirements and collaborating with many other cross-functional teams of over 300 members</li>
+                                </ul>
+                                <strong>Software Engineer — UI</strong>
+                                <div className="muted" style={{ color: "var(--muted)" }}>Jun 2022 — May 2023</div>
+                                <ul>
+                                    <li>Developed customizable Angular & Spartacus components for e-commerce platforms, achieving 90%+ user satisfaction and generating $200M+ in revenue.</li>
+                                    <li>Engineered Spartacus migration from legacy code, reducing deployment time by 50% and downtime by 70%.</li>
+                                    <li>Implemented SSJS and AMPscript Salesforce forms, improving form efficiency by 50%.</li>
                                 </ul>
                             </li>
                             <li className="t-item card reveal" style={{ padding: 16, listStyle: "none" }}>
                                 <div className="t-dot" aria-hidden="true"></div>
-                                <strong>Software Engineer — Beta Systems</strong>
-                                <div className="muted" style={{ color: "var(--muted)" }}>2019 — 2022</div>
+                                <strong>Senior Software Engineer — Vanilla Networks</strong>
+                                <div className="muted" style={{ color: "var(--muted)" }}>Dec 2020 — May 2022</div>
                                 <ul>
-                                    <li>Shipped React + GraphQL platform serving 1M+ monthly users at sub-200ms p95.</li>
-                                    <li>Introduced bundle splitting & SSR, reducing TTI by 42%.</li>
+                                    <li>Built high-performance React + TypeScript query builder application, processing 200K+ data records with interactive charts.</li>
+                                    <li>Developed real-time sensor visualization POC, reducing API load and loading time from 10+ minutes to under 5 seconds.</li>
+                                    <li>Created multi-step form MVP for event tracking and reporting, mitigating 7+ major incidents within launch week.</li>
                                 </ul>
                             </li>
                             <li className="t-item card reveal" style={{ padding: 16, listStyle: "none" }}>
                                 <div className="t-dot" aria-hidden="true"></div>
-                                <strong>Intern — Gamma Labs</strong>
-                                <div className="muted" style={{ color: "var(--muted)" }}>2018 — 2019</div>
+                                <strong>Software Engineer — Attinad Software Pvt. Ltd.</strong>
+                                <div className="muted" style={{ color: "var(--muted)" }}>Dec 2019 — Nov 2020</div>
                                 <ul>
-                                    <li>Built internal tooling and developer dashboards; automated releases with GitHub Actions.</li>
+                                    <li>Designed recursive React components for infinite hierarchy data models using React, TypeScript, Redux, and Redux Thunk.</li>
+                                    <li>Optimized sophisticated chart feature for visualizing multiple datasets over extended time periods.</li>
+                                </ul>
+                            </li>
+                            <li className="t-item card reveal" style={{ padding: 16, listStyle: "none" }}>
+                                <div className="t-dot" aria-hidden="true"></div>
+                                <strong>Automation Engineer (Trainee) — SMEC Automation Pvt Ltd</strong>
+                                <div className="muted" style={{ color: "var(--muted)" }}>Sep 2019 — Nov 2019</div>
+                                <ul>
+                                    <li>Engineered automation solutions using PLCs, DCSs, SCADA, and HMIs from ABB, Schneider Electric, GE, and Yokogawa.</li>
+                                    <li>Automated real-world applications including traffic lights and elevators, achieving 30%+ efficiency improvements.</li>
                                 </ul>
                             </li>
                         </ol>
