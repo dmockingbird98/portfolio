@@ -121,7 +121,7 @@ function App() {
                 await navigator.clipboard.writeText("anand@example.com");
                 copyEmail.textContent = "📋 Copied email to clipboard!";
                 setTimeout(() => {
-                    copyEmail.textContent = "📧 anand@example.com";
+                    copyEmail.textContent = "✉️ E-Mail";
                 }, 1600);
             } catch { }
         });
@@ -378,13 +378,18 @@ function App() {
                                 <h3 style={{ marginTop: 0 }}>Elsewhere</h3>
                                 <p className="lead">I'm active on the platforms below. For the fastest reply, email me.</p>
                                 <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", margin: ".6rem 0 1rem" }}>
-                                    <a className="btn ghost" href="mailto:anand@example.com" id="copyEmail">📧 anand@example.com</a>
-                                    <a className="btn ghost" href="https://www.linkedin.com/in/your-handle/" target="_blank" rel="noopener">LinkedIn</a>
-                                    <a className="btn ghost" href="https://github.com/your-handle" target="_blank" rel="noopener">GitHub</a>
-                                    <a className="btn ghost" href="#">Twitter/X</a>
+                                    <a className="btn ghost" href="mailto:anand.raghu98@gmail.com" id="copyEmail">✉️ E-Mail</a>
+                                    <a className="btn ghost" href="www.linkedin.com/in/anand-raghunathan" target="_blank" rel="noopener">💼 LinkedIn</a>
+                                    <a className="btn ghost" href="https://github.com/dmockingbird98" target="_blank" rel="noopener">🐙 GitHub</a>
                                 </div>
                                 <div className="card" style={{ padding: 12, background: "var(--card-2)", borderRadius: 12 }}>
-                                    <strong>Based in:</strong> Bengaluru, India 🇮🇳<br />
+                                    <strong>Based in:</strong> Bengaluru, India <svg style={{ display: "inline-block", width: "1.2em", height: "0.8em", marginLeft: "0.3em", verticalAlign: "middle" }} viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="900" height="200" fill="#FF9933"/>
+                                        <rect y="200" width="900" height="200" fill="#FFFFFF"/>
+                                        <rect y="400" width="900" height="200" fill="#138808"/>
+                                        <circle cx="450" cy="300" r="60" fill="#000080"/>
+                                        <text x="450" y="315" textAnchor="middle" fontSize="90" fill="#000080" fontWeight="bold">☸</text>
+                                    </svg> <br />
                                     <strong>Open to:</strong> Full-time • Remote • Consulting
                                 </div>
                             </div>

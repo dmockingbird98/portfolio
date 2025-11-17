@@ -114,6 +114,7 @@ img {
     box-shadow: 0 10px 30px -10px var(--shadow);
     transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s var(--ease);
     will-change: transform;
+    cursor: pointer;
 }
 
 .btn:hover {
