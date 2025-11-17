@@ -362,7 +362,7 @@ function App() {
 
             <footer>
                 <div className="container">
-                    © <span id="year"></span> Anand Raghunathan — Built with ♥ in React.
+                    © <span id="year"></span> Anand Raghunathan. All rights reserved.
                 </div>
             </footer>
         </div>
