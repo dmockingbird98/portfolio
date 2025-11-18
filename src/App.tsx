@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import resume from "./assets/Anand_Raghunathan_Resume.pdf";
+import photo from "./assets/Anand_photo_unofficial_edited.jpg";
 
 function App() {
     const [year] = useState<number>(new Date().getFullYear());
@@ -188,8 +189,9 @@ function App() {
                                 <a className="btn ghost" href={resume} download>Download Résumé</a>
                             </div>
                         </div>
-                        <div className="portrait tilt" aria-label="Abstract portrait placeholder">
-                            <div className="initials" aria-hidden="true">AR</div>
+                        <div className="portrait tilt portrait-with-photo" aria-label="Portrait of Anand Raghunathan">
+                            <img src={photo} alt="Anand Raghunathan" className="portrait-img" />
+                            <div className="initials portrait-watermark" aria-hidden="true">AR</div>
                         </div>
                     </div>
                 </section>

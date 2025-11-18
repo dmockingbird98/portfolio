@@ -275,23 +275,15 @@ nav {
 }
 
 .portrait::before, .portrait::after {
+    /* Remove decorative radial gradients and animations for a clean portrait */
     content: "";
     position: absolute;
     inset: -30%;
     border-radius: 50%;
-    filter: blur(40px);
-    opacity: .5;
-    animation: float 12s ease-in-out infinite;
-}
-
-.portrait::before {
-    background: radial-gradient(circle at 30% 30%, var(--accent), transparent 60%);
-    animation-delay: -2s;
-}
-
-.portrait::after {
-    background: radial-gradient(circle at 70% 70%, var(--accent-2), transparent 60%);
-    animation-delay: -6s;
+    filter: none;
+    opacity: 0;
+    background: none;
+    animation: none;
 }
 
 .portrait .initials {
@@ -306,6 +298,47 @@ nav {
     mix-blend-mode: screen;
     transform: translateZ(0);
     animation: popIn .8s var(--ease) .1s both;
+}
+
+/* Portrait when using an actual photo: image fills container, watermark on top */
+.portrait-with-photo {
+    position: relative;
+    overflow: hidden;
+    /* remove decorative radial gradients that create the blue background for the photo variant */
+    background: var(--card);
+}
+
+.portrait-with-photo .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.portrait-with-photo .portrait-watermark {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    opacity: 0.12;
+    font-size: clamp(2.8rem, 8vw, 4.2rem);
+    font-weight: 900;
+    color: currentColor;
+}
+.portrait-with-photo:hover .portrait-watermark {
+    animation: colorShift 0.6s var(--ease) forwards;
+}
+
+@keyframes colorShift {
+    0% {
+        color: currentColor;
+        opacity: 0.12;
+    }
+    100% {
+        color: var(--accent);
+        opacity: 0.3;
+    }
 }
 
 /* -------------------- Sections -------------------- */
