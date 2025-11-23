@@ -1,5 +1,47 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+
+declare global {
+    interface Window {
+        dataLayer?: any[];
+        gtag?: (...args: any[]) => void;
+    }
+}
+
+const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+
+function initGA() {
+    if (!GA_ID) return;
+    if (document.querySelector(`script[src*="gtag/js?id=${GA_ID}"]`)) return;
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function _gtag() {
+        window.dataLayer!.push(arguments);
+    }
+    (window as any).gtag = _gtag;
+    (window as any).gtag("js", new Date());
+    (window as any).gtag("config", GA_ID, { send_page_view: false });
+}
+
+function sendPageView(path: string) {
+    try {
+        if ((window as any).gtag) {
+            (window as any).gtag("event", "page_view", { page_path: path });
+        }
+    } catch { }
+}
+
+function gtagEvent(name: string, params: Record<string, any> = {}) {
+    try {
+        if ((window as any).gtag) {
+            (window as any).gtag("event", name, params);
+        }
+    } catch { }
+}
 import resume from "./assets/Anand_Raghunathan_Resume.pdf";
 import photo from "./assets/Anand_photo_unofficial_edited.jpg";
 
@@ -18,6 +60,13 @@ function App() {
     });
 
     useEffect(() => {
+        // Initialize Google Analytics if configured
+        initGA();
+        // send initial page_view (we disable automatic pageview in config)
+        try {
+            sendPageView(location.pathname + location.hash);
+        } catch { }
+
         // Smooth Scroll
         const handleLinkClick = (e: Event) => {
             const a = e.currentTarget as HTMLAnchorElement;
@@ -25,11 +74,18 @@ function App() {
             if (id && id.startsWith("#") && id.length > 1) {
                 e.preventDefault();
                 document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+                try {
+                    sendPageView(id);
+                } catch { }
             }
         };
         document.querySelectorAll('a[href^="#"]').forEach(a =>
             a.addEventListener("click", handleLinkClick)
         );
+
+        // track hash changes as pageviews
+        const handleHashChange = () => sendPageView(location.pathname + location.hash);
+        window.addEventListener("hashchange", handleHashChange);
 
         // Theme handled via React state (see separate effect below)
 
@@ -105,32 +161,80 @@ function App() {
         // Contact form
         const form = document.getElementById("contactForm") as HTMLFormElement;
         const statusEl = document.getElementById("formStatus") as HTMLElement;
-        form?.addEventListener("submit", e => {
+        const contactSubmitHandler = (e: Event) => {
             e.preventDefault();
             statusEl.style.display = "inline-flex";
             statusEl.textContent = "Sending…";
             setTimeout(() => {
                 statusEl.textContent = "Thanks! I’ll get back to you shortly.";
+                gtagEvent("contact_form_submit", { method: "contact_form" });
             }, 800);
-        });
+        };
+        form?.addEventListener("submit", contactSubmitHandler);
 
         // Copy Email
         const copyEmail = document.getElementById("copyEmail");
-        copyEmail?.addEventListener("click", async e => {
+        const copyEmailHandler = async (e: Event) => {
             e.preventDefault();
             try {
                 await navigator.clipboard.writeText("anand@example.com");
-                copyEmail.textContent = "📋 Copied email to clipboard!";
+                (copyEmail as HTMLElement).textContent = "📋 Copied email to clipboard!";
                 setTimeout(() => {
-                    copyEmail.textContent = "✉️ E-Mail";
+                    (copyEmail as HTMLElement).textContent = "✉️ E-Mail";
                 }, 1600);
+                gtagEvent("copy_email");
             } catch { }
-        });
+        };
+        copyEmail?.addEventListener("click", copyEmailHandler);
+
+        // Resume download tracking
+        const resumeEl = document.querySelector('a[href$=".pdf"]') as HTMLAnchorElement | null;
+        const resumeHandler = (e: Event) => {
+            const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
+            gtagEvent("download_resume", { href });
+        };
+        resumeEl?.addEventListener("click", resumeHandler);
+
+        // Project link clicks
+        const projectLinks = document.querySelectorAll('.project .links a');
+        const projectClickHandler = (e: Event) => {
+            const a = e.currentTarget as HTMLAnchorElement;
+            const project = a.closest('.project')?.querySelector('h3')?.textContent || a.textContent;
+            gtagEvent('project_link_click', { project, label: a.textContent, href: a.getAttribute('href') });
+        };
+        projectLinks.forEach(a => a.addEventListener('click', projectClickHandler));
+
+        // Outbound links
+        const outbound = document.querySelectorAll('a[target="_blank"]');
+        const outboundHandler = (e: Event) => {
+            const a = e.currentTarget as HTMLAnchorElement;
+            gtagEvent('outbound_link', { href: a.href });
+        };
+        outbound.forEach(a => a.addEventListener('click', outboundHandler));
+
+        // Theme toggle analytics (capture new theme after toggle)
+        const themeBtn = document.getElementById('themeToggle');
+        const themeHandler = () => setTimeout(() => gtagEvent('theme_toggle', { theme: document.documentElement.classList.contains('theme-dark') ? 'theme-dark' : 'theme-light' }), 0);
+        themeBtn?.addEventListener('click', themeHandler);
 
         return () => {
             document
                 .querySelectorAll('a[href^="#"]')
                 .forEach(a => a.removeEventListener("click", handleLinkClick));
+            document.removeEventListener("scroll", setProgress as any);
+            io.disconnect();
+            barIO.disconnect();
+            tilts.forEach(t => {
+                t.removeEventListener("mousemove", handleMove as any);
+                t.removeEventListener("mouseleave", resetTilt as any);
+            });
+            form?.removeEventListener("submit", contactSubmitHandler);
+            copyEmail?.removeEventListener("click", copyEmailHandler);
+            resumeEl?.removeEventListener("click", resumeHandler);
+            projectLinks.forEach(a => a.removeEventListener('click', projectClickHandler));
+            outbound.forEach(a => a.removeEventListener('click', outboundHandler));
+            window.removeEventListener("hashchange", handleHashChange);
+            themeBtn?.removeEventListener('click', themeHandler);
         };
     }, []);
 
