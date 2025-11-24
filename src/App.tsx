@@ -492,7 +492,7 @@ function App() {
                                 <p className="lead">I'm active on the platforms below. For the fastest reply, email me.</p>
                                 <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", margin: ".6rem 0 1rem" }}>
                                     <a className="btn ghost" href="mailto:anand.raghu98@gmail.com" id="copyEmail">✉️ E-Mail</a>
-                                    <a className="btn ghost" href="www.linkedin.com/in/anand-raghunathan" target="_blank" rel="noopener">💼 LinkedIn</a>
+                                    <a className="btn ghost" href="https://www.linkedin.com/in/anand-raghunathan" target="_blank" rel="noopener">💼 LinkedIn</a>
                                     <a className="btn ghost" href="https://github.com/dmockingbird98" target="_blank" rel="noopener">🐙 GitHub</a>
                                 </div>
                                 <div className="card" style={{ padding: 12, background: "var(--card-2)", borderRadius: 12 }}>
