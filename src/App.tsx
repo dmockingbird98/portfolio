@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import resume from "./assets/Anand_Raghunathan_Resume.pdf";
+import photo from "./assets/Anand_photo_unofficial_edited.jpg";
+import { Footer } from "./components/Footer";
+
 import "./App.css";
 
 declare global {
@@ -42,11 +46,8 @@ function gtagEvent(name: string, params: Record<string, any> = {}) {
         }
     } catch { }
 }
-import resume from "./assets/Anand_Raghunathan_Resume.pdf";
-import photo from "./assets/Anand_photo_unofficial_edited.jpg";
 
 function App() {
-    const [year] = useState<number>(new Date().getFullYear());
     const [theme, setTheme] = useState<'theme-dark' | 'theme-light'>(() => {
         try {
             const saved = localStorage.getItem("theme");
@@ -511,11 +512,7 @@ function App() {
                 </section>
             </main>
 
-            <footer>
-                <div className="container">
-                    © <span>{year}</span> Anand Raghunathan. All rights reserved.
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

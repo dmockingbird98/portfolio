@@ -520,12 +520,7 @@ h2 {
     box-shadow: 0 0 0 6px rgba(125, 211, 252, .12);
 }
 
-/* Footer */
-footer {
-    padding: 36px 0 76px;
-    color: var(--muted);
-    text-align: center;
-}
+
 
 /* -------------------- Micro-animations -------------------- */
 @keyframes float {
